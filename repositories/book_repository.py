@@ -1,4 +1,4 @@
-import author_repository as author_repo
+import repositories.author_repository as author_repo
 from models.author import Author
 from models.book import Book
 from flask import Flask,render_template,redirect,request
@@ -18,7 +18,8 @@ def select_all():
     sql = 'SELECT * FROM books'
     rows = run_sql(sql)
     for row in rows:
-        book = book(row['title'],row['author_id'],row['id'])
+        author = author_repo.select(row['author_id'])
+        book = Book(row['title'],author,row['id'])
         book_list.append(book)
     return book_list
 
@@ -27,7 +28,7 @@ def select(id):
     sql = 'SELECT * FROM books WHERE id = %s'
     values = [id]
     result = run_sql(sql,values)[0]
-    book = book(result['title'],result['author_id'],result['id'])
+    book = Book(result['title'],result['author_id'],result['id'])
     return book 
 
 def delete(id):

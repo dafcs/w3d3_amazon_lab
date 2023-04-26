@@ -1,0 +1,14 @@
+{% extends 'base.jinja'%}
+
+{% block content %}
+
+{% for book in books %}
+<p><a href="/books/<id>">{{book.title}}</a>
+<span>{{book.author.name}}</span></p>
+<input type="hidden" value="{{book.id}}"/>
+<form action="/books/{{book.id}}/delete" method="post">
+    <input type="submit" name="delete" value="Delete">
+</form>
+
+{% endfor %}
+{% endblock %}
