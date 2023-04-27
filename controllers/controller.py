@@ -16,3 +16,16 @@ def books_():
 def books_delete(id):
     book_repo.delete(id)
     return redirect('/books')
+
+@tasks_blueprint.route('/books/new')
+def add_book_form():
+    authors = author_repo.select_all()
+    return render_template('/books/new.jinja',authors = authors)
+
+# @tasks_blueprint.route('/books/new', methods = ['POST'])
+# def add_book_form(book):
+#     book_title = request.form['title']
+#     book_author = author_repo.select(request.form['author'])
+#     book = Book(book_title,book_author)
+#     book_repo.save(book)
+#     return redirect('/books')

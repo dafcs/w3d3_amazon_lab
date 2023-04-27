@@ -39,3 +39,4 @@ def delete(id):
 def delete_all():
     sql = 'DELETE FROM books'
     run_sql(sql)
+
